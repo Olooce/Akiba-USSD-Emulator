@@ -1,0 +1,18 @@
+{
+  "name": "akiba",
+  "version": "1.0.0",
+  "description": "Browser-based feature-phone emulator for the Akiba SACCO *144# USSD menu",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "tsc && node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "test": "tsc && node --test \"tests/*.test.mjs\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "private": true,
+  "type": "module"
+}
