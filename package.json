@@ -1,9 +1,9 @@
 {
   "name": "akiba",
   "version": "1.0.0",
-  "description": "Browser-based feature-phone emulator for the Akiba SACCO *144# USSD menu",
+  "description": "Browser-based feature-phone emulator for the Akiba SACCO USSD menu",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/build-site.mjs",
     "watch": "tsc --watch",
     "start": "tsc && node scripts/serve.mjs",
     "serve": "node scripts/serve.mjs",
