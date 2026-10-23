@@ -102,6 +102,7 @@ ul {
 }
 
 .lang-switch {
+  cursor: pointer;
   display: inline-flex;
   margin: 0;
   padding: 3px;

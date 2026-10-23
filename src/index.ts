@@ -49,15 +49,26 @@ function init(): void {
     button.addEventListener('click', () => phone.press(key));
   });
 
-  document.querySelectorAll<HTMLInputElement>('input[name="lang"]').forEach((radio) => {
+  const langRadios = document.querySelectorAll<HTMLInputElement>('input[name="lang"]');
+  const applyLang = (next: Lang): void => {
+    langRadios.forEach((radio) => {
+      radio.checked = radio.value === next;
+    });
+    phone.setLanguage(next);
+    document.documentElement.lang = next;
+    storeLang(next);
+  };
+
+  langRadios.forEach((radio) => {
     radio.checked = radio.value === lang;
     radio.addEventListener('change', () => {
-      if (!radio.checked) return;
-      const next = radio.value as Lang;
-      phone.setLanguage(next);
-      document.documentElement.lang = next;
-      storeLang(next);
+      if (radio.checked) applyLang(radio.value as Lang);
     });
+  });
+
+  document.querySelector('.lang-switch')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    applyLang(phone.language === 'en' ? 'sw' : 'en');
   });
 
   document.addEventListener('keydown', (event) => {
