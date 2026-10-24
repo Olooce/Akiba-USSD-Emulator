@@ -1,549 +1,590 @@
 @font-face {
-  font-family: "VT323";
-  src: url("../assets/fonts/VT323-Regular.ttf") format("truetype");
-  font-display: block;
+    font-family: "VT323";
+    src: url("../assets/fonts/VT323-Regular.ttf") format("truetype");
+    font-display: block;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("../assets/fonts/Inter-Variable.ttf") format("truetype");
-  font-weight: 100 900;
-  font-display: swap;
+    font-family: "Inter";
+    src: url("../assets/fonts/Inter-Variable.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
 }
 
 :root {
-  --lcd-background: #c3cfa1;
-  --lcd-ink: #1e2a16;
-  --casing-body: #232726;
-  --casing-bezel: #0e1110;
-  --casing-highlight: #3b413f;
-  --key-face: #383e3c;
-  --key-face-pressed: #272c2a;
-  --key-label: #e3e7e5;
-  --key-label-muted: #9aa3a0;
-  --brand-primary: #1b6e58;
-  --brand-on-casing: #a9b2af;
-  --canvas: #eceeed;
-  --doc-text: #13312c;
-  --doc-muted: #5e6b67;
+    --lcd-background: #c3cfa1;
+    --lcd-ink: #1e2a16;
+    --casing-body: #232726;
+    --casing-bezel: #0e1110;
+    --casing-highlight: #3b413f;
+    --key-face: #383e3c;
+    --key-face-pressed: #272c2a;
+    --key-label: #e3e7e5;
+    --key-label-muted: #9aa3a0;
+    --brand-primary: #1b6e58;
+    --brand-on-casing: #a9b2af;
+    --canvas: #eceeed;
+    --doc-text: #13312c;
+    --doc-muted: #5e6b67;
 
-  --key-shadow: 0 2px 0 rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
-  --font-lcd: "VT323", ui-monospace, monospace;
-  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --key-shadow: 0 2px 0 rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    --font-lcd: "VT323", ui-monospace, monospace;
+    --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --lcd-width: 160px;
-  --lcd-height: 128px;
+    --lcd-width: 160px;
+    --lcd-height: 128px;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--canvas);
-  color: var(--doc-text);
-  font-family: var(--font-ui);
+    margin: 0;
+    min-height: 100vh;
+    background: var(--canvas);
+    color: var(--doc-text);
+    font-family: var(--font-ui);
 }
 
 p,
 h1,
 h2,
 ul {
-  margin: 0;
+    margin: 0;
 }
 
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 /*  Page  */
 
 .stage {
-  display: grid;
-  grid-template-columns: 224px minmax(0, 280px);
-  grid-template-areas:
+    display: grid;
+    grid-template-columns: 224px minmax(0, 280px);
+    grid-template-areas:
     "toolbar toolbar"
     "warning warning"
     "phone guide";
-  justify-content: center;
-  align-items: start;
-  gap: 24px 48px;
-  padding: 40px 16px 56px;
+    justify-content: center;
+    align-items: start;
+    gap: 24px 48px;
+    padding: 40px 16px 56px;
 }
 
 .toolbar {
-  grid-area: toolbar;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+    grid-area: toolbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .toolbar__title h1 {
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
 }
 
 .toolbar__title p {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  color: var(--doc-muted);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: var(--doc-muted);
 }
 
 .lang-switch {
-  cursor: pointer;
-  display: inline-flex;
-  margin: 0;
-  padding: 3px;
-  border: 0;
-  border-radius: 999px;
-  background: #dfe3e1;
+    cursor: pointer;
+    display: inline-flex;
+    margin: 0;
+    padding: 3px;
+    border: 0;
+    border-radius: 999px;
+    background: #dfe3e1;
 }
 
 .lang-switch input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .lang-switch span {
-  display: block;
-  min-width: 44px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  color: var(--doc-muted);
-  cursor: pointer;
+    display: block;
+    min-width: 44px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--doc-muted);
+    cursor: pointer;
 }
 
 .lang-switch input:checked + span {
-  background: var(--casing-body);
-  color: var(--key-label);
+    background: var(--casing-body);
+    color: var(--key-label);
 }
 
 .lang-switch input:focus-visible + span {
-  outline: 2px solid var(--brand-primary);
-  outline-offset: 2px;
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
 }
 
 .overflow-warning {
-  grid-area: warning;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: #fbe9e7;
-  color: #8a2a1f;
-  font-size: 12px;
-  font-weight: 600;
+    grid-area: warning;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #fbe9e7;
+    color: #8a2a1f;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .guide {
-  grid-area: guide;
-  font-size: 13px;
-  line-height: 20px;
-  color: var(--doc-muted);
+    grid-area: guide;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--doc-muted);
 }
 
 .guide h2 {
-  margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--doc-text);
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--doc-text);
 }
 
 .guide ul {
-  display: grid;
-  gap: 8px;
-  padding-left: 18px;
+    display: grid;
+    gap: 8px;
+    padding-left: 18px;
 }
 
 kbd {
-  display: inline-block;
-  min-width: 18px;
-  margin: 0 1px;
-  padding: 0 4px;
-  border-radius: 4px;
-  background: #fff;
-  box-shadow: inset 0 -1px 0 #c9cfcc;
-  font: 600 11px/18px var(--font-ui);
-  text-align: center;
-  color: var(--doc-text);
+    display: inline-block;
+    min-width: 18px;
+    margin: 0 1px;
+    padding: 0 4px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: inset 0 -1px 0 #c9cfcc;
+    font: 600 11px/18px var(--font-ui);
+    text-align: center;
+    color: var(--doc-text);
 }
 
 @media (max-width: 620px) {
-  .stage {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "toolbar" "warning" "phone" "guide";
-    justify-items: center;
-  }
+    .stage {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "toolbar" "warning" "phone" "guide";
+        justify-items: center;
+    }
 
-  .toolbar,
-  .guide {
-    width: 100%;
-    max-width: 320px;
-  }
+    .toolbar,
+    .guide {
+        width: 100%;
+        max-width: 320px;
+    }
 }
 
 /*  Handset */
 
 .handset {
-  grid-area: phone;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 224px;
-  padding: 20px 22px 30px;
-  border: 2px solid var(--casing-highlight);
-  border-radius: 40px 40px 52px 52px;
-  background: var(--casing-body);
-  box-shadow: 0 14px 28px rgb(0 0 0 / 0.25);
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-tap-highlight-color: transparent;
+    grid-area: phone;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 224px;
+    padding: 20px 22px 30px;
+    border: 2px solid var(--casing-highlight);
+    border-radius: 40px 40px 52px 52px;
+    background: var(--casing-body);
+    box-shadow: 0 14px 28px rgb(0 0 0 / 0.25);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .handset__top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
 }
 
 .handset__earpiece {
-  width: 40px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--casing-bezel);
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--casing-bezel);
 }
 
 .handset__wordmark {
-  font: 700 11px/14px var(--font-ui);
-  letter-spacing: 2px;
-  color: var(--brand-on-casing);
+    font: 700 11px/14px var(--font-ui);
+    letter-spacing: 2px;
+    color: var(--brand-on-casing);
 }
 
 .handset__bezel {
-  padding: 8px;
-  border-radius: 10px;
-  background: var(--casing-bezel);
+    padding: 8px;
+    border-radius: 10px;
+    background: var(--casing-bezel);
 }
 
 /*  LCD  */
 
 .lcd {
-  display: flex;
-  flex-direction: column;
-  width: var(--lcd-width);
-  height: var(--lcd-height);
-  overflow: hidden;
-  background: var(--lcd-background);
-  color: var(--lcd-ink);
-  font-family: var(--font-lcd);
-  pointer-events: none; /* no direct interaction with the display */
+    display: flex;
+    flex-direction: column;
+    width: var(--lcd-width);
+    height: var(--lcd-height);
+    overflow: hidden;
+    background: var(--lcd-background);
+    color: var(--lcd-ink);
+    font-family: var(--font-lcd);
+    pointer-events: none; /* no direct interaction with the display */
 }
 
 .lcd__status {
-  display: flex;
-  flex: 0 0 12px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4px;
-  font-size: 13px;
-  line-height: 12px;
+    display: flex;
+    flex: 0 0 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    font-size: 13px;
+    line-height: 12px;
 }
 
 .lcd__signal {
-  display: flex;
-  align-items: flex-end;
-  gap: 1px;
-  height: 9px;
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    height: 9px;
 }
 
 .lcd__signal i {
-  width: 2px;
-  background: var(--lcd-ink);
+    width: 2px;
+    background: var(--lcd-ink);
 }
 
-.lcd__signal i:nth-child(1) { height: 3px; }
-.lcd__signal i:nth-child(2) { height: 5px; }
-.lcd__signal i:nth-child(3) { height: 7px; }
-.lcd__signal i:nth-child(4) { height: 9px; }
+.lcd__signal i:nth-child(1) {
+    height: 3px;
+}
+
+.lcd__signal i:nth-child(2) {
+    height: 5px;
+}
+
+.lcd__signal i:nth-child(3) {
+    height: 7px;
+}
+
+.lcd__signal i:nth-child(4) {
+    height: 9px;
+}
 
 .lcd__battery {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .lcd__battery-body {
-  display: flex;
-  gap: 1px;
-  padding: 1px;
-  border: 1px solid var(--lcd-ink);
+    display: flex;
+    gap: 1px;
+    padding: 1px;
+    border: 1px solid var(--lcd-ink);
 }
 
 .lcd__battery-body i {
-  width: 3px;
-  height: 5px;
-  background: var(--lcd-ink);
+    width: 3px;
+    height: 5px;
+    background: var(--lcd-ink);
 }
 
 .lcd__battery-nub {
-  width: 1px;
-  height: 3px;
-  background: var(--lcd-ink);
+    width: 1px;
+    height: 3px;
+    background: var(--lcd-ink);
 }
 
 .lcd__body {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .lcd__panel {
-  display: none;
-  flex-direction: column;
-  gap: 3px;
-  height: 100%;
-  padding: 3px 4px;
-  overflow: hidden;
-  font-size: 16px;
-  line-height: 14px;
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    height: 100%;
+    padding: 3px 4px;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 14px;
 }
 
 .lcd[data-view="idle"] [data-view-panel="idle"],
 .lcd[data-view="dial"] [data-view-panel="dial"],
 .lcd[data-view="session"] [data-view-panel="session"],
 .lcd[data-view="message"] [data-view-panel="message"] {
-  display: flex;
+    display: flex;
 }
 
 .lcd__panel--idle {
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .lcd__panel--dial {
-  align-items: flex-end;
-  justify-content: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .lcd__display {
-  font-size: 36px;
-  line-height: 30px;
+    font-size: 36px;
+    line-height: 30px;
 }
 
 .lcd__dial {
-  max-width: 100%;
-  text-align: right;
-  overflow-wrap: anywhere;
+    max-width: 100%;
+    text-align: right;
+    overflow-wrap: anywhere;
 }
 
 .lcd__dial.is-long {
-  font-size: 16px;
-  line-height: 14px;
+    font-size: 16px;
+    line-height: 14px;
 }
 
 .lcd__text {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
 .lcd__text.is-centered {
-  margin: auto 0;
-  text-align: center;
+    margin: auto 0;
+    text-align: center;
 }
 
 .lcd__input {
-  display: flex;
-  align-items: center;
-  flex: 0 0 16px;
-  height: 16px;
-  padding: 0 3px;
-  border: 1px solid var(--lcd-ink);
-  white-space: pre;
+    display: flex;
+    align-items: center;
+    flex: 0 0 16px;
+    height: 16px;
+    padding: 0 3px;
+    border: 1px solid var(--lcd-ink);
+    white-space: pre;
 }
 
 .lcd__cursor {
-  align-self: flex-end;
-  width: 6px;
-  height: 2px;
-  margin-bottom: 3px;
-  background: var(--lcd-ink);
-  animation: lcd-blink 1s steps(1) infinite;
+    align-self: flex-end;
+    width: 6px;
+    height: 2px;
+    margin-bottom: 3px;
+    background: var(--lcd-ink);
+    animation: lcd-blink 1s steps(1) infinite;
 }
 
 @keyframes lcd-blink {
-  50% { opacity: 0; }
+    50% {
+        opacity: 0;
+    }
 }
 
 .lcd__softkeys {
-  display: flex;
-  flex: 0 0 13px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1px 4px 0;
-  border-top: 1px solid var(--lcd-ink);
-  font-size: 13px;
-  line-height: 12px;
+    display: flex;
+    flex: 0 0 13px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1px 4px 0;
+    border-top: 1px solid var(--lcd-ink);
+    font-size: 13px;
+    line-height: 12px;
 }
 
 /*  Keypad */
 
 .keypad {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
 }
 
 .keypad__function {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .keypad__column {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .keypad__digits {
-  display: grid;
-  grid-template-columns: repeat(3, 52px);
-  gap: 9px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 52px);
+    gap: 9px 10px;
 }
 
 .key {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  background: var(--key-face);
-  box-shadow: var(--key-shadow);
-  color: var(--key-label);
-  font-family: var(--font-ui);
-  cursor: pointer;
-  transition: background-color 60ms ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: var(--key-face);
+    box-shadow: var(--key-shadow);
+    color: var(--key-label);
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: background-color 60ms ease;
 }
 
 .key:active,
 .key.is-pressed {
-  background: var(--key-face-pressed);
-  box-shadow: none;
-  transform: translateY(2px);
+    background: var(--key-face-pressed);
+    box-shadow: none;
+    transform: translateY(2px);
 }
 
 .key:focus-visible,
 .nav-pad__ok:focus-visible {
-  outline: 2px solid var(--brand-on-casing);
-  outline-offset: 2px;
+    outline: 2px solid var(--brand-on-casing);
+    outline-offset: 2px;
 }
 
 .key--digit {
-  width: 52px;
-  height: 30px;
-  border-radius: 9px;
+    width: 52px;
+    height: 30px;
+    border-radius: 9px;
 }
 
 .key__digit {
-  font-size: 17px;
-  line-height: 20px;
-  font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 600;
 }
 
 .key__letters {
-  font-size: 7px;
-  line-height: 8px;
-  font-weight: 500;
-  letter-spacing: 0.6px;
-  color: var(--key-label-muted);
+    font-size: 7px;
+    line-height: 8px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: var(--key-label-muted);
 }
 
 .key--soft {
-  width: 48px;
-  height: 20px;
-  border-radius: 10px;
+    width: 48px;
+    height: 20px;
+    border-radius: 10px;
 }
 
 .key__mark {
-  width: 16px;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--key-label);
+    width: 16px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--key-label);
 }
 
 .key--action {
-  width: 48px;
-  height: 26px;
-  border-radius: 13px;
+    width: 48px;
+    height: 26px;
+    border-radius: 13px;
 }
 
 .key--action svg {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: var(--key-label);
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: var(--key-label);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .nav-pad {
-  position: relative;
-  width: 64px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--key-face);
-  box-shadow: var(--key-shadow);
+    position: relative;
+    width: 64px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--key-face);
+    box-shadow: var(--key-shadow);
 }
 
 .nav-pad__arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 3px solid transparent;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 3px solid transparent;
 }
 
-.nav-pad__arrow--up { top: 4px; left: 29px; border-bottom: 4px solid var(--key-label-muted); border-top-width: 0; }
-.nav-pad__arrow--down { bottom: 4px; left: 29px; border-top: 4px solid var(--key-label-muted); border-bottom-width: 0; }
-.nav-pad__arrow--left { top: 24px; left: 5px; border-right: 4px solid var(--key-label-muted); border-left-width: 0; }
-.nav-pad__arrow--right { top: 24px; right: 5px; border-left: 4px solid var(--key-label-muted); border-right-width: 0; }
+.nav-pad__arrow--up {
+    top: 4px;
+    left: 29px;
+    border-bottom: 4px solid var(--key-label-muted);
+    border-top-width: 0;
+}
+
+.nav-pad__arrow--down {
+    bottom: 4px;
+    left: 29px;
+    border-top: 4px solid var(--key-label-muted);
+    border-bottom-width: 0;
+}
+
+.nav-pad__arrow--left {
+    top: 24px;
+    left: 5px;
+    border-right: 4px solid var(--key-label-muted);
+    border-left-width: 0;
+}
+
+.nav-pad__arrow--right {
+    top: 24px;
+    right: 5px;
+    border-left: 4px solid var(--key-label-muted);
+    border-right-width: 0;
+}
 
 .nav-pad__ok {
-  position: absolute;
-  top: 15px;
-  left: 17px;
-  width: 30px;
-  height: 24px;
-  padding: 0;
-  border: 1px solid var(--casing-highlight);
-  border-radius: 50%;
-  background: var(--casing-body);
-  cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 17px;
+    width: 30px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--casing-highlight);
+    border-radius: 50%;
+    background: var(--casing-body);
+    cursor: pointer;
 }
 
 .nav-pad__ok:active,
 .nav-pad__ok.is-pressed {
-  background: var(--casing-bezel);
+    background: var(--casing-bezel);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lcd__cursor { animation: none; }
-  .key { transition: none; }
+    .lcd__cursor {
+        animation: none;
+    }
+
+    .key {
+        transition: none;
+    }
 }
