@@ -50,15 +50,23 @@ function init(): void {
     });
 
     const langRadios = document.querySelectorAll<HTMLInputElement>('input[name="lang"]');
+    const guides = document.querySelectorAll<HTMLElement>('[data-guide]');
+    const showGuide = (next: Lang): void => {
+        guides.forEach((guide) => {
+            guide.hidden = guide.dataset.guide !== next;
+        });
+    };
     const applyLang = (next: Lang): void => {
         langRadios.forEach((radio) => {
             radio.checked = radio.value === next;
         });
+        showGuide(next);
         phone.setLanguage(next);
         document.documentElement.lang = next;
         storeLang(next);
     };
 
+    showGuide(lang);
     langRadios.forEach((radio) => {
         radio.checked = radio.value === lang;
         radio.addEventListener('change', () => {
