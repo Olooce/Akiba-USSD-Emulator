@@ -1,6 +1,7 @@
 import {LcdDisplay} from './display.js';
 import type {Lang} from './messages.js';
 import {FeaturePhone, type PhoneKey} from './phone.js';
+import {PIN_ATTEMPTS} from './ussd.js';
 
 const LANG_STORAGE_KEY = 'akiba-emulator-lang';
 
@@ -39,7 +40,7 @@ function init(): void {
     });
 
     const lang = readStoredLang();
-    const phone = new FeaturePhone(display, {msisdn: '0712345678', balanceCents: 1_245_000}, lang);
+    const phone = new FeaturePhone(display, {msisdn: '0712345678', balanceCents: 1_245_000, pin: '1234', pinAttemptsLeft: PIN_ATTEMPTS}, lang);
     document.documentElement.lang = lang;
 
     const buttons = new Map<string, HTMLButtonElement>();
