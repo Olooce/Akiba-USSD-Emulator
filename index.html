@@ -16,6 +16,7 @@
             <h1>Akiba SACCO</h1>
             <p>USSD emulator</p>
         </div>
+        <a class="toolbar__link" href="log.html">Session log</a>
         <fieldset class="lang-switch">
             <legend class="visually-hidden">Display language</legend>
             <label><input checked name="lang" type="radio" value="en"><span>EN</span></label>
@@ -27,106 +28,112 @@
         Screen copy exceeds the 160×128 display.
     </p>
 
-    <section aria-label="Feature phone" class="handset">
-        <div aria-hidden="true" class="handset__top">
-            <span class="handset__earpiece"></span>
-            <span class="handset__wordmark">AKIBA</span>
-        </div>
-
-        <div class="handset__bezel">
-            <div aria-label="Phone display" aria-live="polite" class="lcd" data-lcd="root" data-view="idle">
-                <div aria-hidden="true" class="lcd__status">
-                    <span class="lcd__signal"><i></i><i></i><i></i><i></i></span>
-                    <span class="lcd__title">AKIBA</span>
-                    <span class="lcd__battery"><span class="lcd__battery-body"><i></i><i></i><i></i></span><span
-                            class="lcd__battery-nub"></span></span>
-                </div>
-
-                <div class="lcd__body" data-lcd="body">
-                    <div class="lcd__panel lcd__panel--idle" data-view-panel="idle">
-                        <p class="lcd__display" data-lcd="idle-time"></p>
-                        <p data-lcd="idle-date"></p>
-                    </div>
-                    <div class="lcd__panel lcd__panel--dial" data-view-panel="dial">
-                        <p class="lcd__display lcd__dial" data-lcd="dial-value"></p>
-                    </div>
-                    <div class="lcd__panel" data-view-panel="session">
-                        <p class="lcd__text" data-lcd="session-text"></p>
-                        <p class="lcd__input"><span data-lcd="session-input"></span><span class="lcd__cursor"></span>
-                        </p>
-                    </div>
-                    <div class="lcd__panel" data-view-panel="message">
-                        <p class="lcd__text" data-lcd="message-text"></p>
-                    </div>
-                </div>
-
-                <div class="lcd__softkeys">
-                    <span data-lcd="soft-left"></span>
-                    <span data-lcd="soft-right"></span>
-                </div>
+    <div class="phone-column">
+        <section aria-label="Feature phone" class="handset">
+            <div aria-hidden="true" class="handset__top">
+                <span class="handset__earpiece"></span>
+                <span class="handset__wordmark">AKIBA</span>
             </div>
-        </div>
 
-        <div class="keypad">
-            <div class="keypad__function">
-                <div class="keypad__column">
-                    <button aria-label="Left soft key" class="key key--soft" data-key="soft-left" type="button"><span
-                            class="key__mark"></span></button>
-                    <button aria-label="Call / Send" class="key key--action" data-key="call" type="button">
-                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                    </button>
-                </div>
+            <div class="handset__bezel">
+                <div aria-label="Phone display" aria-live="polite" class="lcd" data-lcd="root" data-view="idle">
+                    <div aria-hidden="true" class="lcd__status">
+                        <span class="lcd__signal"><i></i><i></i><i></i><i></i></span>
+                        <span class="lcd__title">AKIBA</span>
+                        <span class="lcd__battery"><span class="lcd__battery-body"><i></i><i></i><i></i></span><span
+                                class="lcd__battery-nub"></span></span>
+                    </div>
 
-                <div class="nav-pad">
-                    <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--up"></span>
-                    <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--down"></span>
-                    <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--left"></span>
-                    <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--right"></span>
-                    <button aria-label="OK" class="nav-pad__ok" data-key="ok" type="button"></button>
-                </div>
+                    <div class="lcd__body" data-lcd="body">
+                        <div class="lcd__panel lcd__panel--idle" data-view-panel="idle">
+                            <p class="lcd__display" data-lcd="idle-time"></p>
+                            <p data-lcd="idle-date"></p>
+                        </div>
+                        <div class="lcd__panel lcd__panel--dial" data-view-panel="dial">
+                            <p class="lcd__display lcd__dial" data-lcd="dial-value"></p>
+                        </div>
+                        <div class="lcd__panel" data-view-panel="session">
+                            <p class="lcd__text" data-lcd="session-text"></p>
+                            <p class="lcd__input"><span data-lcd="session-input"></span><span
+                                    class="lcd__cursor"></span>
+                            </p>
+                        </div>
+                        <div class="lcd__panel" data-view-panel="message">
+                            <p class="lcd__text" data-lcd="message-text"></p>
+                        </div>
+                    </div>
 
-                <div class="keypad__column">
-                    <button aria-label="Right soft key" class="key key--soft" data-key="soft-right" type="button"><span
-                            class="key__mark"></span></button>
-                    <button aria-label="End / Cancel" class="key key--action" data-key="end" type="button">
-                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                            <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"/>
-                            <path d="M22 2 2 22"/>
-                        </svg>
-                    </button>
+                    <div class="lcd__softkeys">
+                        <span data-lcd="soft-left"></span>
+                        <span data-lcd="soft-right"></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="keypad__digits">
-                <button class="key key--digit" data-key="1" type="button"><span class="key__digit">1</span><span
-                        class="key__letters">&nbsp;</span></button>
-                <button class="key key--digit" data-key="2" type="button"><span class="key__digit">2</span><span
-                        class="key__letters">ABC</span></button>
-                <button class="key key--digit" data-key="3" type="button"><span class="key__digit">3</span><span
-                        class="key__letters">DEF</span></button>
-                <button class="key key--digit" data-key="4" type="button"><span class="key__digit">4</span><span
-                        class="key__letters">GHI</span></button>
-                <button class="key key--digit" data-key="5" type="button"><span class="key__digit">5</span><span
-                        class="key__letters">JKL</span></button>
-                <button class="key key--digit" data-key="6" type="button"><span class="key__digit">6</span><span
-                        class="key__letters">MNO</span></button>
-                <button class="key key--digit" data-key="7" type="button"><span class="key__digit">7</span><span
-                        class="key__letters">PQRS</span></button>
-                <button class="key key--digit" data-key="8" type="button"><span class="key__digit">8</span><span
-                        class="key__letters">TUV</span></button>
-                <button class="key key--digit" data-key="9" type="button"><span class="key__digit">9</span><span
-                        class="key__letters">WXYZ</span></button>
-                <button aria-label="Star" class="key key--digit" data-key="*" type="button"><span
-                        class="key__digit">*</span><span class="key__letters">+</span></button>
-                <button class="key key--digit" data-key="0" type="button"><span class="key__digit">0</span><span
-                        class="key__letters">␣</span></button>
-                <button aria-label="Hash" class="key key--digit" data-key="#" type="button"><span
-                        class="key__digit">#</span><span class="key__letters">⇧</span></button>
+            <div class="keypad">
+                <div class="keypad__function">
+                    <div class="keypad__column">
+                        <button aria-label="Left soft key" class="key key--soft" data-key="soft-left"
+                                type="button"><span
+                                class="key__mark"></span></button>
+                        <button aria-label="Call / Send" class="key key--action" data-key="call" type="button">
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="nav-pad">
+                        <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--up"></span>
+                        <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--down"></span>
+                        <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--left"></span>
+                        <span aria-hidden="true" class="nav-pad__arrow nav-pad__arrow--right"></span>
+                        <button aria-label="OK" class="nav-pad__ok" data-key="ok" type="button"></button>
+                    </div>
+
+                    <div class="keypad__column">
+                        <button aria-label="Right soft key" class="key key--soft" data-key="soft-right"
+                                type="button"><span
+                                class="key__mark"></span></button>
+                        <button aria-label="End / Cancel" class="key key--action" data-key="end" type="button">
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"/>
+                                <path d="M22 2 2 22"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="keypad__digits">
+                    <button class="key key--digit" data-key="1" type="button"><span class="key__digit">1</span><span
+                            class="key__letters">&nbsp;</span></button>
+                    <button class="key key--digit" data-key="2" type="button"><span class="key__digit">2</span><span
+                            class="key__letters">ABC</span></button>
+                    <button class="key key--digit" data-key="3" type="button"><span class="key__digit">3</span><span
+                            class="key__letters">DEF</span></button>
+                    <button class="key key--digit" data-key="4" type="button"><span class="key__digit">4</span><span
+                            class="key__letters">GHI</span></button>
+                    <button class="key key--digit" data-key="5" type="button"><span class="key__digit">5</span><span
+                            class="key__letters">JKL</span></button>
+                    <button class="key key--digit" data-key="6" type="button"><span class="key__digit">6</span><span
+                            class="key__letters">MNO</span></button>
+                    <button class="key key--digit" data-key="7" type="button"><span class="key__digit">7</span><span
+                            class="key__letters">PQRS</span></button>
+                    <button class="key key--digit" data-key="8" type="button"><span class="key__digit">8</span><span
+                            class="key__letters">TUV</span></button>
+                    <button class="key key--digit" data-key="9" type="button"><span class="key__digit">9</span><span
+                            class="key__letters">WXYZ</span></button>
+                    <button aria-label="Star" class="key key--digit" data-key="*" type="button"><span
+                            class="key__digit">*</span><span class="key__letters">+</span></button>
+                    <button class="key key--digit" data-key="0" type="button"><span class="key__digit">0</span><span
+                            class="key__letters">␣</span></button>
+                    <button aria-label="Hash" class="key key--digit" data-key="#" type="button"><span
+                            class="key__digit">#</span><span class="key__letters">⇧</span></button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <p class="ussd-counter" data-ussd-counter title="USSD message size: encoding, units used / page limit"></p>
+    </div>
 
     <aside aria-label="How to use" class="guide" data-guide="en" lang="en">
         <h2>How to use</h2>
@@ -134,10 +141,16 @@
             <li>Dial <kbd>*</kbd><kbd>1</kbd><kbd>4</kbd><kbd>4</kbd><kbd>#</kbd>, then press Call or the left soft key.
             </li>
             <li>Type a menu number and press Send (left soft key, Call or OK).</li>
-            <li>Reply <kbd>0</kbd> to go back. The right soft key clears a digit, or cancels when the reply is empty.
+            <li>Reply <kbd>0</kbd> to go back and <kbd>0</kbd><kbd>0</kbd> for the main menu. The right soft key clears
+                a
+                digit, or cancels when the reply is empty.
+            </li>
+            <li>On the mini statement, reply <kbd>9</kbd><kbd>8</kbd> for the next page and <kbd>0</kbd> for the
+                previous one.
             </li>
             <li>End closes the session.</li>
-            <li>Log in once per session with the demo PIN <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd>. Three wrong PINs
+            <li>Log in once per session with the demo PIN <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd>. Three wrong
+                PINs
                 lock the account.
             </li>
             <li>Keyboard: digits, <kbd>*</kbd> <kbd>#</kbd>, <kbd>Enter</kbd> = Call, <kbd>Esc</kbd> = End, <kbd>Backspace</kbd>
@@ -149,13 +162,19 @@
     <aside aria-label="Jinsi ya kutumia" class="guide" data-guide="sw" hidden lang="sw">
         <h2>Jinsi ya kutumia</h2>
         <ul>
-            <li>Piga <kbd>*</kbd><kbd>1</kbd><kbd>4</kbd><kbd>4</kbd><kbd>#</kbd>, kisha bonyeza Piga au kitufe cha kushoto.
+            <li>Piga <kbd>*</kbd><kbd>1</kbd><kbd>4</kbd><kbd>4</kbd><kbd>#</kbd>, kisha bonyeza Piga au kitufe cha
+                kushoto.
             </li>
             <li>Andika nambari ya menyu na ubonyeze Tuma (kitufe cha kushoto, Piga au OK).</li>
-            <li>Jibu <kbd>0</kbd> kurudi nyuma. Kitufe cha kulia hufuta tarakimu, au hughairi jibu likiwa tupu.
+            <li>Jibu <kbd>0</kbd> kurudi nyuma na <kbd>0</kbd><kbd>0</kbd> kwa menyu kuu. Kitufe cha kulia hufuta
+                tarakimu,
+                au hughairi jibu likiwa tupu.
+            </li>
+            <li>Kwenye taarifa fupi, jibu <kbd>9</kbd><kbd>8</kbd> kwa ukurasa unaofuata na <kbd>0</kbd> kwa uliopita.
             </li>
             <li>Maliza hufunga huduma.</li>
-            <li>Ingia mara moja kwa kila huduma ukitumia PIN ya majaribio <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd>. PIN
+            <li>Ingia mara moja kwa kila huduma ukitumia PIN ya majaribio
+                <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd>. PIN
                 isiyo sahihi mara tatu hufunga akaunti.
             </li>
             <li>Kibodi: tarakimu, <kbd>*</kbd> <kbd>#</kbd>, <kbd>Enter</kbd> = Piga, <kbd>Esc</kbd> = Maliza, <kbd>Backspace</kbd>

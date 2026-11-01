@@ -1,0 +1,65 @@
+.log-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 16px 56px;
+}
+
+.log-page .toolbar {
+    grid-area: auto;
+}
+
+.log-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.log-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--doc-muted);
+}
+
+.log-lang select {
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--control-radius);
+    background: var(--color-surface);
+    color: var(--doc-text);
+    font: inherit;
+}
+
+.log-danger {
+    color: var(--color-danger);
+}
+
+.log-path {
+    padding: 8px 12px;
+    border-radius: var(--control-radius);
+    background: var(--color-primary-soft);
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.log-path[hidden] {
+    display: none;
+}
+
+.log-status--invalid,
+.log-status--timeout {
+    color: var(--color-danger);
+}
+
+.log-status--end {
+    color: var(--color-primary);
+}

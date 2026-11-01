@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Akiba SACCO - USSD Session Log</title>
+    <meta content="Session log of the Akiba SACCO USSD emulator." name="description">
+    <link href="styles/emulator.css" rel="stylesheet">
+    <link href="styles/data-table.css" rel="stylesheet">
+    <link href="styles/log.css" rel="stylesheet">
+    <script src="dist/log.js" type="module"></script>
+</head>
+<body>
+<main class="log-page">
+    <header class="toolbar">
+        <div class="toolbar__title">
+            <h1>Session log</h1>
+            <p data-log-count></p>
+        </div>
+        <a class="toolbar__link" href="index.html">Back to emulator</a>
+    </header>
+
+    <div class="log-actions">
+        <label class="log-lang">Show text in
+            <select data-log-lang>
+                <option value="en">English</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </label>
+        <button class="btn btn--ghost btn--sm" data-log-refresh type="button">Refresh</button>
+        <button class="btn btn--ghost btn--sm" data-log-export type="button">Export CSV</button>
+        <button class="btn btn--ghost btn--sm log-danger" data-log-clear type="button">Clear log</button>
+    </div>
+
+    <p class="log-path" data-log-path hidden></p>
+
+    <div data-log-table></div>
+</main>
+</body>
+</html>
