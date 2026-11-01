@@ -198,8 +198,35 @@ kbd {
 
 /*  Handset */
 
-.handset {
+.phone-column {
     grid-area: phone;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.ussd-counter {
+    min-height: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--doc-muted);
+}
+
+.ussd-counter.is-over {
+    color: #8a2a1f;
+}
+
+.toolbar__link {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--doc-muted);
+}
+
+.handset {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,7 +1,9 @@
 import {LcdDisplay} from './display.js';
+import {assertRegistry} from './engine.js';
+import {createIndexedDbLogRepo} from './logRepo.js';
 import type {Lang} from './messages.js';
-import {FeaturePhone, type PhoneKey} from './phone.js';
-import {PIN_ATTEMPTS} from './ussd.js';
+import {createMockAccount} from './mockData.js';
+import {FeaturePhone, type PhoneKey, type View} from './phone.js';
 
 const LANG_STORAGE_KEY = 'akiba-emulator-lang';
 
@@ -31,6 +33,8 @@ function storeLang(lang: Lang): void {
 }
 
 function init(): void {
+    assertRegistry();
+
     const lcd = document.querySelector<HTMLElement>('[data-lcd="root"]');
     if (!lcd) throw new Error('LCD element not found');
     const overflowWarning = document.querySelector<HTMLElement>('[data-overflow-warning]');
@@ -38,9 +42,19 @@ function init(): void {
     const display = new LcdDisplay(lcd, (overflowing) => {
         if (overflowWarning) overflowWarning.hidden = !overflowing;
     });
+    const counter = document.querySelector<HTMLElement>('[data-ussd-counter]');
+    const renderer = {
+        render(view: View): void {
+            display.render(view);
+            if (!counter) return;
+            const encoding = view.kind === 'session' || view.kind === 'message' ? view.encoding : undefined;
+            counter.textContent = encoding ? `${encoding.scheme} ${encoding.units}/${encoding.limit}` : '';
+            counter.classList.toggle('is-over', !!encoding && encoding.units > encoding.limit);
+        },
+    };
 
     const lang = readStoredLang();
-    const phone = new FeaturePhone(display, {msisdn: '0712345678', balanceCents: 1_245_000, pin: '1234', pinAttemptsLeft: PIN_ATTEMPTS}, lang);
+    const phone = new FeaturePhone(renderer, createMockAccount(), lang, undefined, createIndexedDbLogRepo());
     document.documentElement.lang = lang;
 
     const buttons = new Map<string, HTMLButtonElement>();
