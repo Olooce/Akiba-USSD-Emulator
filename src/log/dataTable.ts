@@ -1,5 +1,3 @@
-// TypeScript port of survey-pad's `assets/js/components/dataTable.js`; behaviour, markup and class names are unchanged.
-
 /**
  * DataTable: standalone, configuration-driven table.
  *

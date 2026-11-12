@@ -1,7 +1,7 @@
 import {createDataTable, type TableState} from './dataTable.js';
-import type {LogRecord, Status} from './engine.js';
+import type {LogRecord, Status} from '../ussd/types.js';
 import {createIndexedDbLogRepo} from './logRepo.js';
-import {COPY, type Lang} from './messages.js';
+import {COPY, type Lang} from '../messages.js';
 
 const LANG_STORAGE_KEY = 'akiba-emulator-lang';
 const CSV_FIELDS: (keyof LogRecord)[] = [

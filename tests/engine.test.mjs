@@ -1,21 +1,17 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {config} from '../dist/config.js';
-import {measureUssd} from '../dist/encoding.js';
-import {assertRegistry, checkRegistry, pageFooter, paginate, UssdEngine} from '../dist/engine.js';
-import {displayRows} from '../dist/lcdGrid.js';
-import {createMemoryLogRepo} from '../dist/logRepo.js';
+import {displayRows, fillIn, measureUssd} from '../dist/ussd/text.js';
+import {pageFooter, paginate} from '../dist/ussd/screenTypes.js';
+import {UssdEngine} from '../dist/ussd/engine.js';
+import {assertRegistry, checkRegistry} from '../dist/ussd/checks.js';
+import {createMemoryLogRepo} from '../dist/log/logRepo.js';
 import {COPY} from '../dist/messages.js';
 import {createMockAccount} from '../dist/mockData.js';
-import {registry, SAMPLE_DATA} from '../dist/screens.js';
-import {actions} from '../dist/actions.js';
-import {validators, guards} from '../dist/validators.js';
-import {resolvers} from '../dist/resolvers.js';
-import {format, formatters} from '../dist/formatters.js';
+import {registry, SAMPLE_DATA} from '../dist/ussd/screens/index.js';
 
 const NOW = new Date(2026, 9, 31, 10, 0).getTime();
 const GRID = {columns: config.display.columns, rows: config.display.sessionRows};
-const REGISTRIES = {actions, validators, guards, resolvers, formatters};
 
 const setup = ({account = createMockAccount({}, NOW), now = () => NOW, lang = 'en'} = {}) => {
     const log = createMemoryLogRepo();
@@ -266,7 +262,7 @@ test('every page but the last offers 98, and lines are kept in order without los
         pages.slice(0, -1).forEach((p) => assert.ok(p.endsWith(`\n${more}`), p));
         assert.ok(pages.at(-1).endsWith(`\n${back}`) && !pages.at(-1).includes('98.'), pages.at(-1));
 
-        const expected = resolvers.miniStatement(ctx.session).map((msg) => format(COPY[lang], msg));
+        const expected = registry.screens.miniStatement.lines(ctx.session).map((msg) => fillIn(COPY[lang], msg));
         const body = pages.flatMap((p) => p.split('\n').slice(1, -1));
         assert.deepEqual(body, expected);
     }
@@ -353,24 +349,22 @@ const withScreens = (patch) => ({registry: {...registry, screens: {...registry.s
 test('startup checks catch broken navigation and names', () => {
     const problems = checkRegistry(withScreens({
         main: {
-            prompt: 'main.prompt', nav: false,
+            type: 'menu', prompt: 'main.prompt', nav: false,
             options: {
                 1: {label: 'main.balance', next: 'nowhere'},
                 2: {label: 'main.withdraw', next: 'withdraw', action: 'commitTransaction'},
-                3: {label: 'main.airtime', action: 'launchRocket'},
                 0: {label: 'main.statement', next: 'miniStatement'},
                 '5a': {label: 'main.statement', next: 'miniStatement'},
             },
         },
         enterPhone: {
-            prompt: 'phone.prompt',
+            type: 'input', prompt: 'phone.prompt',
             input: {name: 'recipient', pattern: '(', maxLength: 10, error: 'phone.invalid'}
         },
     }));
     const expected = [
         /option "1" goes to unknown screen "nowhere"/,
         /option "2" needs exactly one of next or action/,
-        /option "3" uses unknown action "launchRocket"/,
         /option "0" uses a reserved key/,
         /option "5a" is not digits only/,
         /screen "enterPhone" needs exactly one of next or action/,
@@ -379,7 +373,7 @@ test('startup checks catch broken navigation and names', () => {
     for (const re of expected) assert.ok(problems.some((p) => re.test(p)), `${re} not in:\n${problems.join('\n')}`);
     assert.throws(() => assertRegistry(withScreens({
         main: {
-            prompt: 'main.prompt',
+            type: 'menu', prompt: 'main.prompt',
             options: {98: {label: 'nav.more', next: 'main'}}
         }
     })), /reserved key/);
@@ -401,15 +395,12 @@ test('startup checks catch a screen that is too long in Swahili only', () => {
 });
 
 test('startup checks catch a statement line that cannot fit on any page', () => {
-    const problems = checkRegistry({
-        registries: {
-            ...REGISTRIES,
-            resolvers: {
-                ...resolvers,
-                miniStatement: () => [{id: 'statement.line', vars: {at: NOW, type: 'x'.repeat(200), amount: 1}}]
-            },
+    const problems = checkRegistry(withScreens({
+        miniStatement: {
+            ...registry.screens.miniStatement,
+            lines: () => [{id: 'statement.line', vars: {at: NOW, type: 'x'.repeat(200), amount: 1}}],
         },
-    });
+    }));
     assert.ok(problems.some((p) => /screen "miniStatement" \(en\) cannot be paginated/.test(p)), problems.join('\n'));
 });
 

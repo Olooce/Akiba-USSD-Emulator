@@ -1,8 +1,8 @@
-import {config} from './config.js';
-import type {Encoding} from './encoding.js';
-import {type LogSink, type Outcome, type Session, UssdEngine} from './engine.js';
-import {COPY, formatIdleDate, type SoftkeyLabels} from './messages.js';
-import type {Account, Lang, Notice} from './types.js';
+import {config} from '../config.js';
+import type {Encoding} from '../ussd/text.js';
+import {UssdEngine} from '../ussd/engine.js';
+import {COPY, formatIdleDate, type SoftkeyLabels} from '../messages.js';
+import type {Account, Lang, LogSink, Notice, Outcome, Session} from '../ussd/types.js';
 
 export const DIGIT_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'] as const;
 export type DigitKey = (typeof DIGIT_KEYS)[number];
@@ -85,10 +85,8 @@ export class FeaturePhone {
                 if (key === 'end') return {kind: 'idle'};
                 if (isSendKey(key)) {
                     if (mode.value !== config.serviceCode) return {kind: 'message', source: {type: 'unknownCode'}};
-                    return this.request(() => {
-                        this.session = this.engine.start(this.account, this.lang);
-                        return {status: 'continue', transactional: false};
-                    });
+                    this.session = this.engine.start(this.account, this.lang);
+                    return this.waitForNetwork({status: 'continue', transactional: false});
                 }
                 return mode;
 
@@ -103,8 +101,7 @@ export class FeaturePhone {
                 if (key === 'soft-right' && mode.input) return {...mode, input: mode.input.slice(0, -1)};
                 if (key === 'soft-right' || key === 'end') return this.cancel();
                 if (isSendKey(key) && mode.input) {
-                    const input = mode.input;
-                    return this.request(() => this.engine.reply(this.session!, input, this.lang));
+                    return this.waitForNetwork(this.engine.reply(this.session!, mode.input, this.lang));
                 }
                 return mode;
             }
@@ -124,9 +121,9 @@ export class FeaturePhone {
         return {kind: 'message', source: {type: 'ussd'}};
     }
 
-    private request(send: () => Outcome): Mode {
+    /** Shows "Please wait..." for as long as the network would take to answer, then the reply. */
+    private waitForNetwork(outcome: Outcome): Mode {
         this.clearTimer();
-        const outcome = send();
         if (outcome.notice) this.scheduleSms(outcome.notice);
         const delay = outcome.transactional ? config.transactionMs : config.responseMs;
         this.timer = setTimeout(() => this.deliver(), delay);
