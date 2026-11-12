@@ -1,4 +1,4 @@
-import type {LogRecord, LogSink, Status} from './engine.js';
+import type {LogRecord, LogSink, Status} from '../ussd/types.js';
 
 export interface LogFilter {
     sessionId?: string;

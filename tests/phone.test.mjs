@@ -1,11 +1,11 @@
 import {afterEach, beforeEach, mock, test} from 'node:test';
 import assert from 'node:assert/strict';
 import {config} from '../dist/config.js';
-import {measureUssd} from '../dist/encoding.js';
-import {createMemoryLogRepo} from '../dist/logRepo.js';
+import {measureUssd} from '../dist/ussd/text.js';
+import {createMemoryLogRepo} from '../dist/log/logRepo.js';
 import {COPY} from '../dist/messages.js';
 import {createMockAccount} from '../dist/mockData.js';
-import {FeaturePhone} from '../dist/phone.js';
+import {FeaturePhone} from '../dist/phone/phone.js';
 
 beforeEach(() => mock.timers.enable({apis: ['setTimeout', 'Date'], now: new Date(2026, 9, 21, 10, 24)}));
 afterEach(() => mock.timers.reset());

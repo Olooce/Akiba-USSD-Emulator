@@ -1,8 +1,8 @@
 import {config} from './config.js';
 import {BANKS} from './mockData.js';
-import type {Lang, Notice, SessionData} from './types.js';
+import type {Lang, Notice, SessionData} from './ussd/types.js';
 
-export type {Lang} from './types.js';
+export type {Lang} from './ussd/types.js';
 
 export interface SoftkeyLabels {
     left: string;
@@ -19,6 +19,7 @@ const EN_USSD = {
     'main.prompt': 'Akiba SACCO',
     'main.balance': 'Balance Enquiry',
     'main.withdraw': 'Withdraw Money',
+    'main.deposit': 'Deposit Money',
     'main.airtime': 'Buy Airtime',
     'main.statement': 'Mini Statement',
 
@@ -143,6 +144,7 @@ const SW: Copy = {
         'main.prompt': 'Akiba SACCO',
         'main.balance': 'Angalia Salio',
         'main.withdraw': 'Toa Pesa',
+        'main.deposit': 'Weka Pesa',
         'main.airtime': 'Nunua Airtime',
         'main.statement': 'Taarifa Fupi',
 
@@ -200,3 +202,4 @@ export function formatIdleDate(lang: Lang, d: Date): string {
     const c = COPY[lang];
     return `${c.weekdays[d.getDay()]} ${d.getDate()} ${c.months[d.getMonth()]}`;
 }
+

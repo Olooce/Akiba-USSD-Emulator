@@ -1,5 +1,5 @@
 import {config} from './config.js';
-import type {Account, Transaction, TxnType} from './types.js';
+import type {Account, Transaction, TxnType} from './ussd/types.js';
 
 export const BANKS = ['Pamoja Bank', 'Umoja Bank', 'Jamii Bank'] as const;
 

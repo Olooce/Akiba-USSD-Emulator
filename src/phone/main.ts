@@ -1,8 +1,8 @@
 import {LcdDisplay} from './display.js';
-import {assertRegistry} from './engine.js';
-import {createIndexedDbLogRepo} from './logRepo.js';
-import type {Lang} from './messages.js';
-import {createMockAccount} from './mockData.js';
+import {assertRegistry} from '../ussd/checks.js';
+import {createIndexedDbLogRepo} from '../log/logRepo.js';
+import type {Lang} from '../messages.js';
+import {createMockAccount} from '../mockData.js';
 import {FeaturePhone, type PhoneKey, type View} from './phone.js';
 
 const LANG_STORAGE_KEY = 'akiba-emulator-lang';
